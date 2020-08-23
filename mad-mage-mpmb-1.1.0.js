@@ -1,4 +1,4 @@
-var iFileName = "Shitney's MPMB Expansion v1.0.0";
+var iFileName = "Shitney's MPMB Expansion v1.1.0";
 RequiredSheetVersion(13);
 
 // Define Sources
@@ -25,6 +25,10 @@ SourceList.IG_RD = {
 }
 
 /*
+	v1.1.0 Includes:
+	- New Items
+		- The Slugger [Dormant]
+
 	v1.0.0 Includes:
 	- Ring of Shooting Stars 
 		- Updated to use 'real' spells instead of buggy overwriting of existing spells
@@ -205,5 +209,94 @@ MagicItemsList["makluan key"] = {
 			description: "+1d4 radiant damage, and heal for the same amount; Disadv. on Sleight of Hand & Dex Crafting checks until long rest",
 			modifiers: [1, 1]
 		}]
+	}
+};
+
+// Adding "spells" for The Slugger's actions
+SpellsList["blowback"] = {
+	name: "Blowback",
+	source: ["CT_DM", ""],
+	classes: [],
+	level: 1,
+	school: "Slugger",
+	save: "Dex",
+	time: "1 bns",
+	range: "25 ft radius",
+	components: "M\u0192",
+	compMaterial: "Spells cast by magic items don't require any components other than the magic item itself.",
+	duration: "Instantaneous",
+	description: "Crea in range take 1d8+2 fire dmg, 1d8+2 blud dmg, and knockback 10 ft, save halves + no knockback",
+	descriptionFull: "Pointing the cannon straight down to fire, creatures within a 25 foot radius make a DEX save. On fail, creatures take 1d8+2 bludgeoning and 1d8+2 fire damage and are knocked back 10 feet. On success, creatures take half as much damage and are not knocked back." + AtHigherLevels + "Each additional charge consumed increases one of the damage rolls (your choice) by 1d8, and knockback distance increases by 5 feet."
+};
+SpellsList["blastoff"] = {
+	name: "Blastoff",
+	source: ["CT_DM", ""],
+	classes: [],
+	level: 1,
+	school: "Slugger",
+	save: "Dex",
+	time: "1 bns",
+	range: "5 ft radius",
+	components: "M\u0192",
+	compMaterial: "Spells cast by magic items don't require any components other than the magic item itself.",
+	duration: "Instantaneous",
+	description: "DC 13 Athletics: travel 30 ft, w/ extra crea (Medium+: disadv); remaining crea take 3d4 fire, save halves",
+	descriptionFull: "You point the cannon behind you, and make a DC 13 Athletics check. On success, you and up to one other creature of your choice fly up to 30 feet in a straight line. Taking a Medium or larger creature with you imposes disadvantage on the check. Creatures that are not flown away (including you if the check was failed) within 5 feet must make a DEX save. On fail, take 3d4 fire damage. On success, damage is halved." + AtHigherLevels + "Each additional charge consumed increases travel distance by 15 feet, and the Athletics check DC increases by 1."
+};
+SpellsList["fire"] = {
+	name: "Fire!",
+	source: ["CT_DM", ""],
+	classes: [],
+	level: 1,
+	school: "Slugger",
+	save: "Dex",
+	time: "1 bns",
+	range: "60 ft line",
+	components: "M\u0192",
+	compMaterial: "Spells cast by magic items don't require any components other than the magic item itself.",
+	duration: "Instantaneous",
+	description: "Crea hit take 2d6+3 fire dmg & 2d6+3 blud dmg & push 5 ft OR prone, save halves + no push",
+	descriptionFull: "You fire the cannon in a 60 foot long, 5 foot wide line, creatures caught in this line must make a DEX save. On fail, creatures in this line take 2d6+3 fire damage and 2d6+3 bludgeoning damage and are pushed back up to 5 feet or knocked prone (your choice). On success, creatures take half as much damage and are not pushed/knocked." + AtHigherLevels + "Each additional charge consumed increases fire damage by 1d6+1, and increases bludgeoning damage by 1d6+1."
+};
+MagicItemsList["the slugger"] = {
+	name: "The Slugger",
+	source: ["CT_DM", ""],
+	attunement: true,
+	type: "weapon (greatclub)",
+	rarity: "artifact",
+	weight: 15,
+	action: [["action", "Reload (Take 1d6 fire dmg. per charge loaded)"], ["bonus", "Fire Cannon (Take 1d8 blud. dmg per charge spent)"]],
+	choices: ["Dormant"],
+	"dormant": {
+		description: "This cannon can be used as a +2 Greatclub, which gains charges on successful hits. These charges can be loaded into the cannon as an action, taking 1d6 fire dmg per charge. While loaded, you can use a bonus action for any of its abilities in the Spells section, taking 1d8 bludgeoning dmg per charge spent.",
+		descriptionFull: "This iron cannon is mounted to a crude wooden bat handle, held together with thick red rope and etched leather, and adorned with various charms of forge gods and nautical deities. \n   This functions as a +2 greatclub, and on a successful hit, the user gains a charge, up to three of which can be loaded into the cannon as an action, dealing 1d6 fire damage to the user per charge loaded.\n   While loaded, these charges can be used to fire the cannon as a bonus action, dealing 1d8 bludgeoning damage to the user per charge, in addition to their effects, which are detailed below and in the Spells page as if they were cast with a single charge, and \"higher levels\" are details for each additional charge used. These functions count as item usages rather than spells, but use your Strength spellcasting modifier for saves and attacks.\n   Blowback: Pointing the cannon straight down to fire, creatures within a 25 foot radius make a DEX save. On fail, creatures take 1d8+2 bludgeoning and 1d8+2 fire damage and are knocked back 10 feet. On success, creatures take half as much damage and are not knocked back. Each additional charge consumed increases one of the damage rolls (your choice) by 1d8, and knockback distance increases by 5 feet.\n   Blastoff: You point the cannon behind you, and make a DC 13 Athletics check. On success, you and up to one other creature of your choice fly up to 30 feet in a straight line. Taking a Medium or larger creature with you imposes disadvantage on the check. Creatures that are not flown away (including you if the check was failed) within 5 feet must make a DEX save. On fail, take 3d4 fire damage. On success, damage is halved. Each additional charge consumed increases travel distance by 15 feet, and the Athletics check DC increases by 1.\n   Fire!: You fire the cannon in a 60 foot long, 5 foot wide line, creatures caught in this line must make a DEX save. On fail, creatures in this line take 2d6+3 fire damage and 2d6+3 bludgeoning damage and are pushed back up to 5 feet or knocked prone (your choice). On success, creatures take half as much damage and are not pushed/knocked. Each additional charge consumed increases fire damage by 1d6+1, and increases bludgeoning damage by 1d6+1.",
+		usages : 3,
+		recovery : "Reload",
+		weaponsAdd: ["The Slugger"],
+		weaponOptions: [{
+			baseWeapon: "greatclub",
+			regExpSearch: /^(?=.*the)(?=.*slugger).*$/i,
+			name: "The Slugger",
+			source: ["CT_DM", ""],
+			description: "Gain one charge on hit, expiring at the end of your next turn if you have not taken damage or loaded it.",
+			modifiers: [2, 2]
+		}],
+		fixedDC : 16,
+		spellcastingBonus: [{
+			name: "1-3 charges",
+			spells: ["blowback"],
+			selection: ["blowback"],
+			firstCol: "1-3"
+		}, {
+			name: "Blastoff (1-3 chr)",
+			spells: ["blastoff"],
+			selection: ["blastoff"],
+			firstCol: "1-3"
+		}, {
+			name: "Fire! (1-3 chr)",
+			spells: ["fire"],
+			selection: ["fire"],
+			firstCol: "1-3"
+		}] 
 	}
 };
