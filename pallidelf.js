@@ -1,8 +1,8 @@
 var iFileName = "Shitney's Pallid Elf.js";
-RequiredSheetVersion(12.999);
+RequiredSheetVersion(13);
 
 // Define the source
-SourceList.EGtW={
+SourceList.W={
 	name : "Explorer's Guide to Wildemount",
 	abbreviation : "EGtW",
 	group : "Primary Sources",
@@ -14,7 +14,7 @@ RaceList["pallid elf"] = {
 	regExpSearch : /^(?!.*half)((?=.*(pallid))|((?=.*\b(elfs?|elves|elvish|elven)\b))).*$/i,
 	name : "Pallid Elf",
 	sortname : "Elf, Pallid",
-	source : ["EGtW", 200],
+	source : ["W", 200],
 	plural : "Pallid Elves",
 	size : 3,
 	speed : {
