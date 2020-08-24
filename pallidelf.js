@@ -21,7 +21,7 @@ RaceList["pallid elf"] = {
 		walk : { spd : 30, enc : 20 }
 	},
 	languageProfs : ["Common", "Elvish"],
-	vision : [["Darkvision", 60],["Adv. on Intelligence (Investigation) and Wisdom (Insight) checks", ""]],
+	vision : [["Darkvision", 60], ["Adv. on Intelligence (Investigation) and Wisdom (Insight) checks", ""]],
 	savetxt : {
 		text : ["Magic can't put me to sleep"],
 		adv_vs : ["charmed"]
