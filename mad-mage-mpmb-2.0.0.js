@@ -38,8 +38,6 @@ SourceList.IG_JG = {
 	- New Items
 		- Goggles of Dwarvenkin
 		- Mercurial Rod
-	- New Feats
-		- Practiced Expert
 	- Minor Changes
 		- Added bullet points to the descriptions of The Slugger and Makluan Key
 
