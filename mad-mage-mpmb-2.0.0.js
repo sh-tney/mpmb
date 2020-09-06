@@ -1,4 +1,4 @@
-var iFileName = "Shitney's MPMB Expansion v1.1.0";
+var iFileName = "Shitney's MPMB Expansion v2.0.0";
 RequiredSheetVersion(13);
 
 // Define Sources
@@ -22,9 +22,34 @@ SourceList.IG_RD = {
 	group: "Instagram User: qrolanp",
 	url: "https://www.instagram.com/qrolanp/",
 	date: "2020/03/02"
-}
+};
+SourceList.IG_JG = {
+	name: "mrjamesgifford's Instagram Additions",
+	abbreviation: "IG:JG",
+	group: "Instagram User: mrjamesgifford",
+	url: "https://www.instagram.com/mrjamesgifford/",
+	date: "2020/09/06"
+};
+SourceList.UA_F20 = {
+	name : "Unearthed Arcana: Feats 2020",
+	abbreviation : "UA:F20",
+	group : "Unearthed Arcana",
+	url : "https://media.wizards.com/2020/dnd/downloads/UA2020_Feats.pdf",
+	date : "2020/07/13"
+};
 
 /*
+	v2.0.0 Includes:
+	- Ring of Shooting Stars
+		- Migrated to another file, while fix in official sheet has been confirmed for v13 beta 32
+	- New Items
+		- Goggles of Dwarvenkin
+		- Mercurial Rod
+	- New Feats
+		- Practiced Expert
+	- Minor Changes
+		- Added bullet points to the descriptions of The Slugger and Makluan Key
+
 	v1.1.0 Includes:
 	- New Items
 		- The Slugger [Dormant]
@@ -41,64 +66,6 @@ SourceList.IG_RD = {
 		- Crimson Hair Charm
 		- Makluan Key [Unknown Guest User]
 */
-
-// Adding Ring of Shooting Stars spells as actual spells, so that the item doesn't bug out
-SpellsList["ball lightning"] = {
-	name: "Ball Lightning",
-	source: ["DMG", 192],
-	classes: [],
-	level: 1,
-	school: "Evoc",
-	save: "Dex",
-	time: "1 a",
-	range: "120 ft",
-	components: "M\u0192",
-	compMaterial: "Spells cast by magic items don't require any components other than the magic item itself.",
-	duration: "Conc, 1 min",
-	description: "1-4 spheres; bns a move all 30 ft; 1st crea in 5 ft save or Lightning dmg (1:4d12, 2:5d4, 3:2d6, 4:2d4)",
-	descriptionFull: "You can expend 2 charges from the ring of shooting starts as an action to create one to four 3-foot-diameter spheres of lightning. The more spheres you create, the less powerful each sphere is individually.\n   Each sphere appears in an unoccupied space you can see within 120 feet of you. The spheres last as long as you concentrate (as if concentrating on a spell), up to 1 minute. Each sphere sheds dim light in a 30-foot radius.\n   As a bonus action, you can move each sphere up to 30 feet, but no farther than 120 feet away from you. When a creature other than you comes within 5 feet of a sphere, the sphere discharges lightning at that creature and disappears. That creature must make a DC 15 Dexterity saving throw. On a failed save, the creature takes lightning damage based on the number of spheres you created (4 spheres = 2d4, 3 spheres = 2d6, 2 spheres = 5d4, 1 sphere = 4d12)."
-};
-SpellsList["shooting stars"] = {
-	name: "Shooting Stars",
-	source: ["DMG", 192],
-	classes: [],
-	level: 1,
-	school: "Evoc",
-	time: "1 a",
-	range: "60 ft",
-	components: "M\u0192",
-	compMaterial: "Spells cast by magic items don't require any components other than the magic item itself.",
-	duration: "Instantaneous",
-	description: "15-ft cube in range per expended charge; all crea in cubes take 5d4 Fire damage, save halves",
-	descriptionFull: "You can expend 1 to 3 charges from the ring of shooting starts as an action. For every charge you expend, you launch a glowing mote of light from the ring at a point you can see within 60 feet of you. Each creature within a 15-foot cube originating from that point is showered in sparks and must make a DC 15 Dexterity saving throw. taking 5d4 fire damage on a failed save, or half as much damage on a successful one."
-};
-var fixRingOfShootingStars = function() {
-	var ring = MagicItemsList["ring of shooting stars"];
-	delete ring.toNotesPage;
-	delete ring.spellChanges;
-	ring.spellcastingBonus = [{
-		name: "At will",
-		spells: ["dancing lights", "light"],
-		selection: ["dancing lights", "light"],
-		firstCol: "atwill",
-		times: 2
-	}, {
-		name: "1 charge",
-		spells: ["faerie fire"],
-		selection: ["faerie fire"],
-		firstCol: 1
-	}, {
-		name: "Ball lightning (2 chr)",
-		spells: ["ball lightning"],
-		selection: ["ball lightning"],
-		firstCol: 2
-	}, {
-		name: "Shooting stars (1-3 chr)",
-		spells: ["shooting stars"],
-		selection: ["shooting stars"],
-		firstCol: "1-3"
-	}] 
-}();
 
 // Adds reminder save text for Heavy Armor Master
 var heavyArmorMasterSaveTxt = function() {
@@ -129,6 +96,7 @@ MagicItemsList["soulsting"] = {
 		}
 	}
 };
+
 MagicItemsList["jotunnsbane armor"] = { 
 	name: "Jotunnsbane Armor",
 	source: ["CT_DM", ""],
@@ -153,6 +121,7 @@ MagicItemsList["jotunnsbane armor"] = {
 		}
 	}
 };
+
 MagicItemsList["weapon charm"] = { 
 	name: "Weapon Charm",
 	source: ["EEGG", ""],
@@ -192,7 +161,7 @@ MagicItemsList["makluan key"] = {
 	choices: ["Unknown Guest User"],
 	"unknown guest user": {
 		description: "Adds +1 to unarmed strike attack & damage rolls, with effects per hand. Incoming psychic damage is converted to poison, and I have adv. against Enchantment effects. Striking allies heals them for 2d4, up to 3 times each per long rest. Using these incurs disadv. on Sleight of Hand & Dex Crafting until long rest.",
-		descriptionFull: "This strange tarot card, a Five of Rings coloured black and gold, shimmers green when held up to the light, and transforms into a set of rings for the user.\n   These rings provide a +1 bonus to attack and damage rolls for your unarmed strikes, and can also be used to heal allies in striking distance, for 2d4 per 'attack', up to three times per long rest, per ally.\n   Thoughts, the black set of rings on one hand, deal an additional 1d8 psychic damage on hit, and also deal 1d4 psychic damage to the user.\n   Prayers, the gold set of rings on one hand, deal an additional 1d4 radiant damage on hit, and also heal the user for the same amount.\n   Benefitting from any of the above effects exhausts the user, as well as granting psychic feedback to the user, saying 'Demonstrative Mode, Unknown Guest User'. This exhaustion causes the user to have disadvantage on all Sleight of Hand checks, and all Dexterity based crafting checks until the next long rest.",
+		descriptionFull: "This strange tarot card, a Five of Rings coloured black and gold, shimmers green when held up to the light, and transforms into a set of rings for the user.\n   These rings provide a +1 bonus to attack and damage rolls for your unarmed strikes, and can also be used to heal allies in striking distance, for 2d4 per 'attack', up to three times per long rest, per ally.\n  \u2022 Thoughts, the black set of rings on one hand, deal an additional 1d8 psychic damage on hit, and also deal 1d4 psychic damage to the user.\n  \u2022 Prayers, the gold set of rings on one hand, deal an additional 1d4 radiant damage on hit, and also heal the user for the same amount.\n   Benefitting from any of the above effects exhausts the user, as well as granting psychic feedback to the user, saying 'Demonstrative Mode, Unknown Guest User'. This exhaustion causes the user to have disadvantage on all Sleight of Hand checks, and all Dexterity based crafting checks until the next long rest.",
 		weaponsAdd: ["Thoughts", "Prayers"],
 		weaponOptions: [{
 			baseWeapon: "unarmed strike",
@@ -269,7 +238,7 @@ MagicItemsList["the slugger"] = {
 	choices: ["Dormant"],
 	"dormant": {
 		description: "This cannon can be used as a +2 Greatclub, which gains charges on successful hits. These charges can be loaded into the cannon as an action, taking 1d6 fire dmg per charge. While loaded, you can use a bonus action for any of its abilities in the Spells section, taking 1d8 bludgeoning dmg per charge spent.",
-		descriptionFull: "This iron cannon is mounted to a crude wooden bat handle, held together with thick red rope and etched leather, and adorned with various charms of forge gods and nautical deities. \n   This functions as a +2 greatclub, and on a successful hit, the user gains a charge, up to three of which can be loaded into the cannon as an action, dealing 1d6 fire damage to the user per charge loaded.\n   While loaded, these charges can be used to fire the cannon as a bonus action, dealing 1d8 bludgeoning damage to the user per charge, in addition to their effects, which are detailed below and in the Spells page as if they were cast with a single charge, and \"higher levels\" are details for each additional charge used. These functions count as item usages rather than spells, but use your Strength spellcasting modifier for saves and attacks.\n   Blowback: Pointing the cannon straight down to fire, creatures within a 25 foot radius make a DEX save. On fail, creatures take 1d8+2 bludgeoning and 1d8+2 fire damage and are knocked back 10 feet. On success, creatures take half as much damage and are not knocked back. Each additional charge consumed increases one of the damage rolls (your choice) by 1d8, and knockback distance increases by 5 feet.\n   Blastoff: You point the cannon behind you, and make a DC 13 Athletics check. On success, you and up to one other creature of your choice fly up to 30 feet in a straight line. Taking a Medium or larger creature with you imposes disadvantage on the check. Creatures that are not flown away (including you if the check was failed) within 5 feet must make a DEX save. On fail, take 3d4 fire damage. On success, damage is halved. Each additional charge consumed increases travel distance by 15 feet, and the Athletics check DC increases by 1.\n   Fire!: You fire the cannon in a 60 foot long, 5 foot wide line, creatures caught in this line must make a DEX save. On fail, creatures in this line take 2d6+3 fire damage and 2d6+3 bludgeoning damage and are pushed back up to 5 feet or knocked prone (your choice). On success, creatures take half as much damage and are not pushed/knocked. Each additional charge consumed increases fire damage by 1d6+1, and increases bludgeoning damage by 1d6+1.",
+		descriptionFull: "This iron cannon is mounted to a crude wooden bat handle, held together with thick red rope and etched leather, and adorned with various charms of forge gods and nautical deities. \n   This functions as a +2 greatclub, and on a successful hit, the user gains a charge, up to three of which can be loaded into the cannon as an action, dealing 1d6 fire damage to the user per charge loaded.\n   While loaded, these charges can be used to fire the cannon as a bonus action, dealing 1d8 bludgeoning damage to the user per charge, in addition to their effects, which are detailed below and in the Spells page as if they were cast with a single charge, and \"higher levels\" are details for each additional charge used. These functions count as item usages rather than spells, but use your Strength spellcasting modifier for saves and attacks.\n  \u2022 Blowback: Pointing the cannon straight down to fire, creatures within a 25 foot radius make a DEX save. On fail, creatures take 1d8+2 bludgeoning and 1d8+2 fire damage and are knocked back 10 feet. On success, creatures take half as much damage and are not knocked back. Each additional charge consumed increases one of the damage rolls (your choice) by 1d8, and knockback distance increases by 5 feet.\n  \u2022 Blastoff: You point the cannon behind you, and make a DC 13 Athletics check. On success, you and up to one other creature of your choice fly up to 30 feet in a straight line. Taking a Medium or larger creature with you imposes disadvantage on the check. Creatures that are not flown away (including you if the check was failed) within 5 feet must make a DEX save. On fail, take 3d4 fire damage. On success, damage is halved. Each additional charge consumed increases travel distance by 15 feet, and the Athletics check DC increases by 1.\n  \u2022 Fire!: You fire the cannon in a 60 foot long, 5 foot wide line, creatures caught in this line must make a DEX save. On fail, creatures in this line take 2d6+3 fire damage and 2d6+3 bludgeoning damage and are pushed back up to 5 feet or knocked prone (your choice). On success, creatures take half as much damage and are not pushed/knocked. Each additional charge consumed increases fire damage by 1d6+1, and increases bludgeoning damage by 1d6+1.",
 		usages : 3,
 		recovery : "Reload",
 		weaponsAdd: ["The Slugger"],
@@ -298,5 +267,42 @@ MagicItemsList["the slugger"] = {
 			selection: ["fire"],
 			firstCol: "1-3"
 		}] 
+	}
+};
+
+MagicItemsList["goggles of dwarvenkin"] = {
+	name : "Goggles of Dwarvenkin",
+	source : ["IG_JG", ""],
+	type : "wondrous item",
+	rarity : "uncommon",
+	description : "While wearing these goggles, I have the Stonecunning ability, +2 to Wisdom (Perception) and Intelligence (Investigation) checks for detecting traps or hidden stonework, Darkvision (60 ft), and I know the Dwarvish language. Each day, there is a 20% chance I grow a full beard or my current beard becomes thicker.",
+	descriptionFull : "The wearer sees the world in shades of amber and gold; Traps and hidden stonework in your line of sight slowly light up up around the seams.\n   Stonecunning: While wearing these goggles, whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.\n   You have a +2 to Wisdom (Perception) and Intelligence (Investigation) checks for detecting traps or hidden stonework.\n   You also gain Darkvision out to 60 ft, and you can read, write, and speak the Dwarvish language.\n   Each day at dawn, there is a 20% chance you grow a full beard or your current beard becomes visibly thicker.",
+	languageProfs : ["Dwarvish"],
+	vision : [["Darkvision", 60]]
+};
+
+MagicItemsList["mercurial rod"] = {
+	name : "Mercurial Rod",
+	source : ["CT_DM", ""],
+	type : "weapon",
+	rarity : "legendary",
+	attunement : true,
+	action: ["bonus", " (Change Form)"],
+	usages : 10,
+	recovery : "long rest",
+	additional: "regains 7",
+	description : "This weapon has 10 charges, and regains seven per long rest. When attacking with this weapon, I can expend charges to gain effects, which last 1 hour (hover over this item to see a list). While attuned, I can use a bonus action to take the form of any simple or martial weapon, except it becomes magical.",
+	descriptionFull : "This mysterious rod is made of a soft and malleable metallic material, unlike any common metal. While attuned, you can use a bonus action to change its form, taking on the statistics of any non-magical simple or martial weapon, and it becomoes magical, retaining the rod's abilities.\n   This weapon can store a maximum of ten charges, and regains seven charges per long rest. When attacking, you can expend charges to apply any (up to five at once) of the following effects to this weapon for one hour:\n  \u2022 2 Charges: Add 1d4 Lightning or Cold damage (your choice) to this weapon's damage, this weapon gains reach, if it does not already have it.\n  \u2022 3 Charges: Add 1d4 Radiant, Necrotic, or Thunder damage (your choice), as well as 1d6 Bludgeoning + your Proficiency bonus to this weapon's damage.\n  \u2022 4 Charges: Add 1d6 damage of any type except Psychic (your choice) to this weapon's damage, and this weapon can be used as a ranged weapon (20ft/80ft), without requiring.\n  \u2022 5 Charges: (Expertise) When calculating your proficiency bonus for the purposes of this weapon, double your proficiency bonus.",
+	calcChanges : {
+		atkAdd : [
+			function (fields, v) {
+				if (!v.theWea.isMagicWeapon && (/^(?=.*mercurial).*$/i).test(v.WeaponText)) {
+					v.theWea.isMagicWeapon = true;
+					fields.Description = fields.Description.replace(/(, |; )?Counts as magical/i, '');
+					fields.Description += (fields.Description ? '; ' : '') + 'Charges: (2) +1d4 Cold/Ligh dmg, +reach; (3) +1d4 Rad/Nec/Thu, +1d6+Prof Blud dmg; (4) +1d6+2 Non-Psyc dmg, +ranged; (5) Expertise';
+				}
+			},
+			'If I include the words "Mercurial" in a the name of a weapon, it will be treated as the magic weapon Mercurial Rod. It can expend charges to gain the following effects:\n  \u2022 2 Charges: Add 1d4 Lightning or Cold damage (your choice) to this weapon\'s damage, this weapon gains reach, if it does not already have it.\n  \u2022 3 Charges: Add 1d4 Radiant, Necrotic, or Thunder damage (your choice), as well as 1d6 Bludgeoning + your Proficiency bonus to this weapon\'s damage.\n  \u2022 4 Charges: Add 1d6 damage of any type except Psychic (your choice) to this weapon\'s damage, and this weapon can be used as a ranged weapon (20ft/80ft), without ammunition.\n  \u2022 5 Charges: (Expertise) When calculating your proficiency bonus for the purposes of this weapon, double your proficiency bonus.'
+		]
 	}
 };
