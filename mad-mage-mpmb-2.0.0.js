@@ -30,13 +30,6 @@ SourceList.IG_JG = {
 	url: "https://www.instagram.com/mrjamesgifford/",
 	date: "2020/09/06"
 };
-SourceList.UA_F20 = {
-	name : "Unearthed Arcana: Feats 2020",
-	abbreviation : "UA:F20",
-	group : "Unearthed Arcana",
-	url : "https://media.wizards.com/2020/dnd/downloads/UA2020_Feats.pdf",
-	date : "2020/07/13"
-};
 
 /*
 	v2.0.0 Includes:
